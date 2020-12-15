@@ -40,3 +40,16 @@ SELECT sum(p.price)
 FROM orders o
 JOIN products p ON p.id = o.product_id
 WHERE o.id = 1
+
+
+ALTER TABLE orders
+ADD COLUMN user_id INT REFERENCES users(id);
+
+INSERT INTO orders (product_id, user_id)
+VALUES (2, 1), (1, 2), (3,3);
+
+SELECT count(*) 
+FROM orders o
+JOIN products p ON p.id = o.product_id
+JOIN users u ON u.id = o.user_id
+GROUP BY u.id;
